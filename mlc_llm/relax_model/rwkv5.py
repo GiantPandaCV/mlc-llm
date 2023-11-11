@@ -136,6 +136,7 @@ def create_wkv5_func(B: T.int32, T_dim: T.int32, C: T.int32, H: T.int32, dtype: 
         state: T.handle,
         out: T.handle
     ):
+        T.func_attr({"op_pattern": 8, "tir.noalias": True, "tir.is_scheduled": 1})
         # Define buffer variables
         r_buf = T.match_buffer(r, (B, T_dim, H, C // H), dtype=dtype,)
         k_buf = T.match_buffer(k, (B, T_dim, H, C // H), dtype=dtype,)
